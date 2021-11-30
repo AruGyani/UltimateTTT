@@ -13,11 +13,13 @@ public class Human extends Player {
         int selectedBoard = -1;
         boolean isValid = false;
 
+        // Input validation
         while (!isValid) {
             try {
                 System.out.print("Please select a valid board : ");
                 selectedBoard = s.nextInt();
 
+                // check if selected board is within valid boundaries
                 if (selectedBoard >= 0 && selectedBoard < boards.length) {
                     if (boards[selectedBoard].isAccessible()) isValid = true;
                     else System.out.println("\nError. This board is not accessible.\n");
@@ -35,11 +37,13 @@ public class Human extends Player {
         int selectedSquare = -1;
         boolean isValid = false;
 
+        // input validation
         while (!isValid) {
             try {
                 System.out.print("Please select a valid square on the selected board : ");
                 selectedSquare = s.nextInt();
 
+                // check if selected square is within valid boundaries
                 if (selectedSquare >= 0 && selectedSquare < board.length) {
                     if (board.isAvailable(selectedSquare)) isValid = true;
                     else System.out.println("\n Error. This square is unavailable.\n");

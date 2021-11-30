@@ -19,9 +19,11 @@ public class UltimateTTT {
         players = new Player[2];
         s = new Scanner(System.in);
 
+        // Initialize empty boards
         for (int i = 0; i < boards.length; i++)
             boards[i] = new Board();
 
+        // Initialize players based on game mode
         createPlayers();
     }
 
@@ -29,6 +31,7 @@ public class UltimateTTT {
         boolean isValid = false;
         int selection = -1;
 
+        // Player input validation
         while (!isValid) {
             System.out.print("Please select a game mode:\n\t1 - Player vs Player\n\t2 - Player vs AI\n\t3 - AI vs AI\n\n> ");
             try {
@@ -65,12 +68,15 @@ public class UltimateTTT {
         while (!gameOver) {
             System.out.println("\nCurrent Player is : " + currentPlayer.getValue());
 
+            // If board is not selected, select new board
             if (selectedBoard == -1) selectedBoard = currentPlayer.selectBoard(s, boards);
             System.out.println("Selected Board: " + selectedBoard);
 
+            // If square is not selected, select new square
             if (selectedSquare == -1) selectedSquare = currentPlayer.selectSquare(s, boards[selectedBoard]);
             System.out.println("Selected Square: " + selectedSquare);
 
+            // Make move
             boards[selectedBoard].move(selectedSquare, currentPlayer);
 
             selectedBoard = updateAccessibleBoards(selectedSquare);
@@ -78,7 +84,8 @@ public class UltimateTTT {
 
             print();
             printWinners();
-            
+
+            // Check win conditions
             if (isFull()) {
                 System.out.println("\nGame Over. Tie!");
                 gameOver = true;
@@ -92,11 +99,13 @@ public class UltimateTTT {
     }
 
     public int updateAccessibleBoards(int selectedSquare) {
+        // If next board selected is either full or its index isn't equal to the selected square, make unaccessible
         for (int i = 0; i < boards.length; i++) {
             if (i != selectedSquare && !boards[i].isFull()) boards[i].setAccessible(true);
             else boards[i].setAccessible(false);
         }
 
+        // if selected board is full, return -1 to select new square
         if (boards[selectedSquare].isFull()) return -1;
         else return selectedSquare;
     }
@@ -109,6 +118,7 @@ public class UltimateTTT {
         return true;
     }
 
+    // Check win conditions
     public boolean checkWinner() { 
         // Columns
         if (boards[0].getWinner() != null && boards[0].getWinner() == boards[3].getWinner() && boards[3].getWinner() == boards[6].getWinner()) return true;
@@ -128,6 +138,7 @@ public class UltimateTTT {
     }
 
     public void print() {
+        // Print board
         for (int i = 0, j = 1, k = 2; i < boards.length - 2 && j < boards.length - 1 && k < boards.length;  i+=3, j+=3, k+=3) {
             for (int z = 0; z < boards[i].getRows() && z < boards[j].getRows() && z < boards[k].getRows(); z++) {
                 System.out.print("\tBOARD#" + i + " "); boards[i].printRow(z);

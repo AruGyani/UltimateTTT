@@ -50,6 +50,7 @@ public class Board {
         this.winner = player;
     }
 
+    // Return all available squares
     public ArrayList<Integer> getAvailableSquares() {
         ArrayList<Integer> availableSquares = new ArrayList<>();
 
@@ -64,6 +65,7 @@ public class Board {
         return board[selectedSquare] == '-';
     }
 
+    // Check if board is full
     public boolean isFull() {
         boolean full = true;
 

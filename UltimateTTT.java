@@ -1,6 +1,18 @@
 // Aru Gyani
 // CS 2336.002
 
+/** Analysis & Design
+ * UltimateTTT first initializes a 9-indexed array of Board objects. Each board object contains a member char array representative of a Tic-Tac-Toe
+ * board along with the respective rules for Tic-Tac-Toe. The Players are abstracted from the Player class into Human & BasicComputer. Input is taken from
+ * the user via console input, and gameOver conditions are checked at the end of each turn.
+ * 
+ * Each move played is respective to the current state of the game and the instance of each Player. Should a player be a Human instance,
+ * then the user will enter input through the console which is then validated and sent off to the game. Should a player be a BasicComputer instance,
+ * all legal moves are generated and a random legal move is chosen and returned.
+ * 
+ * Game Over conditions are handled similarly to regular Tic-Tac-Toe.
+ */
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
